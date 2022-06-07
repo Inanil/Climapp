@@ -3,6 +3,7 @@ import './App.css'
 import axios from 'axios'
 import { DataWeather } from './Components/DataWeather'
 import Converter from './Components/Converter'
+import Loader from '../../weather-app/src/Components/Loader'
 
 
 
@@ -15,12 +16,11 @@ function App() {
   const [latLon, setLatLon] = useState()
   const [weather, setWeather] = useState()
   const [fahrenheit, setFahrenheit] = useState(0)
- 
- 
+  const [isLoading, setIsLoading] = useState(true)
 
 
 
-//Get longitude and latitude
+  //Get longitude and latitude
   useEffect(() => {
 
     const sucess = pos => {
@@ -42,7 +42,10 @@ function App() {
 
 
       axios.get(URL)
-        .then(res => setWeather(res.data))
+        .then(res => {
+          setWeather(res.data)
+          setIsLoading(false)
+        })
         .catch(err => console.log(err))
 
     }
@@ -50,30 +53,33 @@ function App() {
   }, [latLon])
 
   console.log(weather)
-    //variables for the converter ()
-    const temperature = weather?.main.temp
-    const converter = (temperature - 273.15).toFixed(1)
-    const farenToCel = () => setFahrenheit(!fahrenheit)
+  //variables for the converter ()
+  const temperature = weather?.main.temp
+  const converter = (temperature - 273.15).toFixed(1)
+  const farenToCel = () => setFahrenheit(!fahrenheit)
 
 
   return (
     <div className="App">
+      { isLoading ?
 
-      <main className='box-dataContainer'>
+         <Loader/>:
+         
+        <main className='box-dataContainer'>
 
-        <DataWeather
-          weather={weather}
-        />
-        <Converter
-          weather={weather}
-          temperature={temperature}
-          converter={converter}
-           farenToCel={farenToCel}
-           fahrenheit={fahrenheit}
-        />
+          <DataWeather
+            weather={weather}
+          />
+          <Converter
+            weather={weather}
+            temperature={temperature}
+            converter={converter}
+            farenToCel={farenToCel}
+            fahrenheit={fahrenheit}
+          />
 
-      </main>
-
+        </main>
+      }
 
 
     </div>
