@@ -3,7 +3,8 @@ import './App.css'
 import axios from 'axios'
 import { DataWeather } from './Components/DataWeather'
 import Converter from './Components/Converter'
-import Loader from '../../weather-app/src/Components/Loader'
+import Loader from './Components/Loader'
+
 
 
 
@@ -63,7 +64,7 @@ function App() {
     <div className="App">
       { isLoading ?
 
-         <Loader/>:
+          <Loader/>:
          
         <main className='box-dataContainer'>
 
