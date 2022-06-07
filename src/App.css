@@ -14,7 +14,7 @@
  --second-size:16px;
  --tertiary-size:22px;
  --quarter-size:34px;
- --fifth-size:50px;
+ --fifth-size:46px;
 
   }
 
@@ -36,10 +36,13 @@ body {
 .box-loader{
   background-color: rgba(255, 255, 255, 0.4);
   box-shadow: 1px 1px 5px 0 var(--color-quarter);
-  width:1200px;
-  height: 1200px;
-  border-radius:50%;
-  aspect-ratio:1;
+  width:380px;
+  height:110px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
 }
 
 .box-loader-text{
